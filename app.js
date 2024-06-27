@@ -21,9 +21,9 @@ app.get('/books/:id',(req,res) => {
 app.post('/books/',(req,res) => {
     const id = new Date().getTime();
     const {titulo,autor,año} = req.body;
-    const newBook = libros.push({id:id,title:titulo,author:autor,year:parseint(año)})
+    const {newBook} = libros.push({id:id,title:titulo,author:autor,year:año});
     
-    console.log(newBook);
+    res.json({ message: "libro agregado",newBook});
 });
 
 app.put('/books/:id',(req,res) => {
@@ -32,8 +32,8 @@ app.put('/books/:id',(req,res) => {
     const getbook = libros.find((libros) => libros.id === id);
     getbook.title = titulo;
     getbook.author = autor;
-    getbook.year = año;
-    console.log(getUser);
+    getbook.year = parseint(año);
+    console.log(getBook);
 
     res.json({ message: "libro actualizado" });
 });
